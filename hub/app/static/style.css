@@ -273,6 +273,111 @@ body {
     font-weight: 700;
 }
 
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.btn-text:hover {
+    color: #fff;
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.info-icon {
+    font-size: 1rem;
+}
+
+/* Balão / Card Explicativo */
+.setup-details-box {
+    margin-top: 1rem;
+    background: rgba(10, 13, 22, 0.75);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.setup-details-box.closed {
+    display: none;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.detail-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-main);
+}
+
+.detail-icon {
+    font-size: 1.1rem;
+}
+
+.detail-card ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.detail-card li {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1rem;
+}
+
+.detail-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.detail-card code {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    color: #cbd5e1;
+    font-size: 0.75rem;
+}
+
 /* Custom Config Form */
 .custom-form-grid {
     display: grid;

@@ -123,6 +123,47 @@
                             </svg>
                             Executar Auto-Setup Padrão
                         </button>
+                        <button type="button" class="btn btn-text" id="btnToggleDetails">
+                            <span class="info-icon">ⓘ</span> O que este setup faz por você?
+                        </button>
+                    </div>
+
+                    <!-- Balão / Painel explicativo de ações -->
+                    <div class="setup-details-box open" id="setupDetailsBox">
+                        <div class="details-grid">
+                            <div class="detail-card">
+                                <div class="detail-header"><span class="detail-icon">🔍</span> <strong>Prowlarr</strong></div>
+                                <ul>
+                                    <li>Proxy FlareSolverr (:8191) com tag</li>
+                                    <li>Sincronização com Radarr & Sonarr</li>
+                                    <li>5 indexadores (1337x, YTS, TPB, TGx, EZTV)</li>
+                                </ul>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-header"><span class="detail-icon">🎬</span> <strong>Radarr</strong></div>
+                                <ul>
+                                    <li>Root Folder <code>/data/media/movies</code></li>
+                                    <li>qBittorrent (:8081, cat: <code>movies</code>)</li>
+                                    <li>Hardlinks atômicos (TRaSH Guides)</li>
+                                </ul>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-header"><span class="detail-icon">📺</span> <strong>Sonarr</strong></div>
+                                <ul>
+                                    <li>Root Folder <code>/data/media/tv</code></li>
+                                    <li>qBittorrent (:8081, cat: <code>tv</code>)</li>
+                                    <li>Organização por temporadas</li>
+                                </ul>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-header"><span class="detail-icon">📝</span> <strong>Bazarr</strong></div>
+                                <ul>
+                                    <li>Conecta a Radarr e Sonarr via API</li>
+                                    <li>Idioma padrão: <code>Português (pt-BR)</code></li>
+                                    <li>Sincronia precisa por áudio (ffsubsync)</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
