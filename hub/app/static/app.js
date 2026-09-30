@@ -320,4 +320,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDiscoveredKeys();
     loadDefaultSettings();
     loadHealthStatus();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTab = urlParams.get('tab');
+    if (initialTab) {
+        switchTab(initialTab);
+    }
 });
