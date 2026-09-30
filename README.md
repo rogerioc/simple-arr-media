@@ -1,5 +1,10 @@
 # 🍿 SimpleArrMedia — Home Media Server & *arr Automation Stack
 
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-v2.x-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Built with Google Antigravity](https://img.shields.io/badge/Built%20with-Google%20Antigravity-4285F4?style=flat-square&logo=google&logoColor=white)](https://deepmind.google)
+[![AI Pair Programming](https://img.shields.io/badge/AI%20Pair%20Programmed-Gemini%203.7-8E24AA?style=flat-square&logo=google-gemini&logoColor=white)](https://deepmind.google)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+
 O jeito simples, limpo e descomplicado de subir um servidor de mídia doméstico autônomo com Jellyfin, qBittorrent e a stack *arr completa (Radarr, Sonarr, Prowlarr, Bazarr, FlareSolverr e Jellyseerr) com assistente de configuração em 1 clique e Hardlinks atômicos (TRaSH Guides).
 
 ---
@@ -174,3 +179,10 @@ docker --context default compose logs -f [nome_do_servico]
 * [Arquitetura & Hardlinks](docs/ARCHITECTURE.md)
 * [Guia de Configuração e Integrações](docs/SETUP_GUIDE.md)
 * [Manutenção, Backups e Troubleshooting](docs/MAINTENANCE.md)
+
+---
+
+## 🤖 Desenvolvimento & Pair Programming
+
+Este projeto foi arquitetado, implementado e documentado em colaboração com o **[Google Antigravity](https://deepmind.google)** utilizando o modelo de inteligência artificial **Gemini 3.7**, aplicando engenharia de software agêntica para orquestração de containers, automação de APIs REST e design de interface moderna.
+
