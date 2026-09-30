@@ -75,14 +75,14 @@ Para quem está começando no ecossistema *arr, a divisão modular de responsabi
 | Serviço | Porta | Papel Principal | O que ele faz & Por que existe |
 | :--- | :--- | :--- | :--- |
 | **SimpleArr Hub** | 🚀 `:5000` | **Orquestrador Central** | Automação e setup em 1 clique. Descobre API keys, testa a rede e aplica as regras do TRaSH Guides automaticamente. |
-| **Jellyseerr** | ✨ `:5055` | **Vitrine de Descobertas** | Portal visual moderno estilo Netflix para a família buscar lançamentos e solicitar filmes/séries em 1 clique. |
-| **Radarr** | 🎬 `:7878` | **Gerenciador de Filmes** | Monitora lançamentos de filmes, escolhe qualidades (1080p/4K), envia para download e organiza `/data/media/movies`. |
-| **Sonarr** | 📺 `:8989` | **Gerenciador de Séries** | Monitora temporadas e episódios semanais, renomeia arquivos e organiza pastas por temporada em `/data/media/tv`. |
-| **Prowlarr** | 🔍 `:9696` | **Hub de Indexadores & Trackers** | Cadastro central de sites de torrent (1337x, YTS, TPB, etc.). Sincroniza automaticamente com Radarr e Sonarr em 1 só lugar. |
-| **FlareSolverr** | 🛡️ `:8191` | **Bypass Anti-Bot / Cloudflare** | Atua como proxy inteligente para responder a desafios Cloudflare de sites públicos sem que os trackers quebrem. |
-| **qBittorrent** | 📥 `:8081` | **Motor de Downloads** | Baixa os arquivos via torrent com alta performance e gerencia categorias (`movies`, `tv`) com seeding contínuo. |
-| **Bazarr** | 📝 `:6767` | **Legendas Automáticas** | Varre a biblioteca buscando legendas em pt-BR e sincroniza perfeitamente pelo áudio original do vídeo (`ffsubsync`). |
-| **Jellyfin** | 🍿 `:8096` | **Servidor de Streaming** | O "Netflix próprio": organiza pôsteres, metadados e faz transcodificação por hardware (Intel QSV) para Smart TVs e celulares. |
+| **[Jellyseerr](https://github.com/Fallenbagel/jellyseerr)** | ✨ `:5055` | **Vitrine de Descobertas** | Portal visual moderno estilo Netflix para a família buscar lançamentos e solicitar filmes/séries em 1 clique. |
+| **[Radarr](https://radarr.video/)** | 🎬 `:7878` | **Gerenciador de Filmes** | Monitora lançamentos de filmes, escolhe qualidades (1080p/4K), envia para download e organiza `/data/media/movies`. |
+| **[Sonarr](https://sonarr.tv/)** | 📺 `:8989` | **Gerenciador de Séries** | Monitora temporadas e episódios semanais, renomeia arquivos e organiza pastas por temporada em `/data/media/tv`. |
+| **[Prowlarr](https://prowlarr.com/)** | 🔍 `:9696` | **Hub de Indexadores & Trackers** | Cadastro central de sites de torrent (1337x, YTS, TPB, etc.). Sincroniza automaticamente com Radarr e Sonarr em 1 só lugar. |
+| **[FlareSolverr](https://github.com/FlareSolverr/FlareSolverr)** | 🛡️ `:8191` | **Bypass Anti-Bot / Cloudflare** | Atua como proxy inteligente para responder a desafios Cloudflare de sites públicos sem que os trackers quebrem. |
+| **[qBittorrent](https://www.qbittorrent.org/)** | 📥 `:8081` | **Motor de Downloads** | Baixa os arquivos via torrent com alta performance e gerencia categorias (`movies`, `tv`) com seeding contínuo. |
+| **[Bazarr](https://www.bazarr.media/)** | 📝 `:6767` | **Legendas Automáticas** | Varre a biblioteca buscando legendas em pt-BR e sincroniza perfeitamente pelo áudio original do vídeo (`ffsubsync`). |
+| **[Jellyfin](https://jellyfin.org/)** | 🍿 `:8096` | **Servidor de Streaming** | O "Netflix próprio": organiza pôsteres, metadados e faz transcodificação por hardware (Intel QSV) para Smart TVs e celulares. |
 
 ---
 
@@ -221,13 +221,14 @@ O SimpleArrMedia combina ferramentas consagradas de infraestrutura Linux, contai
 * **Linux cgroups & Permissions**: Isolamento seguro de processos controlados por `PUID`, `PGID` e `UMASK=002`.
 
 ### 📦 Ecossistema de Mídia Integrado
-* **Jellyfin**: Servidor de mídia open source (.NET Core).
-* **Jellyseerr**: Portal de descoberta e solicitações (TypeScript / Node.js).
-* **Radarr & Sonarr**: Gerenciadores de filmes e séries (.NET Core / SQLite).
-* **Prowlarr**: Gerenciador de indexadores e proxies Torznab (.NET Core).
-* **FlareSolverr**: Proxy com Chromium headless (Node.js / Puppeteer) para resolução de proteções Cloudflare.
-* **Bazarr**: Sincronizador de legendas (Python) integrado ao algoritmo de espectrograma de áudio `ffsubsync`.
-* **qBittorrent**: Cliente BitTorrent de alta performance (C++ / libtorrent-rasterbar).
+* **[Jellyfin](https://jellyfin.org/)**: Servidor de mídia open source e cliente de streaming (.NET Core).
+* **[Jellyseerr](https://github.com/Fallenbagel/jellyseerr)**: Portal moderno de descoberta e solicitações de conteúdo (TypeScript / Next.js).
+* **[Radarr](https://radarr.video/)**: Gerenciador e catalogador autônomo de filmes (.NET Core / SQLite).
+* **[Sonarr](https://sonarr.tv/)**: Gerenciador e catalogador de séries e animes (.NET Core / SQLite).
+* **[Prowlarr](https://prowlarr.com/)**: Gerenciador centralizado de indexadores e proxies Torznab (.NET Core).
+* **[FlareSolverr](https://github.com/FlareSolverr/FlareSolverr)**: Proxy inteligente com Chromium headless (Node.js / Puppeteer) para resolução de proteções Cloudflare e CAPTCHA.
+* **[Bazarr](https://www.bazarr.media/)**: Sincronizador de legendas (Python) integrado ao algoritmo de espectrograma de áudio [ffsubsync](https://github.com/smacke/ffsubsync).
+* **[qBittorrent](https://www.qbittorrent.org/)**: Cliente BitTorrent nativo de alta performance (C++ / libtorrent-rasterbar).
 
 ---
 
