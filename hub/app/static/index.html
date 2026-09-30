@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleArrMedia | Central de Automação & Setup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-background"></div>
+    
+    <header class="top-nav">
+        <div class="brand">
+            <div class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <h1>SimpleArr <span>Media</span></h1>
+                <p>Home Media Stack Provisioner & Control Plane</p>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <div class="global-status-badge" id="globalStatusBadge">
+                <span class="status-dot pulsing"></span>
+                <span id="globalStatusText">Verificando Stack...</span>
+            </div>
+            <button class="btn btn-secondary" id="btnRefreshHealth" title="Recarregar status da rede">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                Atualizar
+            </button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Navigation Tabs -->
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="wizard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+                1-Click Setup
+            </button>
+            <button class="tab-btn" data-tab="custom">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                Personalizar Opções
+            </button>
+            <button class="tab-btn" data-tab="services">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+                Status dos Serviços
+            </button>
+            <button class="tab-btn" data-tab="keys">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                </svg>
+                API Keys Descobertas
+            </button>
+        </div>
+
+        <!-- TAB: 1-CLICK WIZARD -->
+        <section id="tab-wizard" class="tab-content active">
+            <div class="hero-card">
+                <div class="hero-content">
+                    <span class="badge badge-accent">Provisionamento Rápido</span>
+                    <h2>Configuração Automática Recomendada</h2>
+                    <p>Aplica as configurações ideais com padrão TRaSH Guides (Hardlinks atômicos, qBittorrent, indexadores essenciais e legendas em pt-BR).</p>
+                    
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Proxy FlareSolverr no Prowlarr</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Hardlinks (/data/media) no Radarr & Sonarr</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Download Client qBittorrent (:8081)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Sincronização Total com Bazarr</span>
+                        </div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn btn-primary btn-large" id="btnRunProvision">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            Executar Auto-Setup Padrão
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quick-status-box">
+                    <h3>Chaves Carregadas</h3>
+                    <div class="key-status-list" id="quickKeyStatusList">
+                        <div class="loading-spinner">Carregando chaves...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Execution Logs Console -->
+            <div class="console-card" id="consoleCard">
+                <div class="console-header">
+                    <div class="console-title">
+                        <span class="terminal-icon">&gt;_</span>
+                        <h3>Terminal de Execução do Provisionamento</h3>
+                    </div>
+                    <span class="console-status" id="consoleStatus">Aguardando comando</span>
+                </div>
+                <div class="console-body" id="consoleBody">
+                    <p class="log-line text-muted">[INFO] Sistema pronto. Clique em executar para provisionar a stack.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: CUSTOM OPTIONS FORM -->
+        <section id="tab-custom" class="tab-content">
+            <div class="section-header">
+                <h2>Configurações Personalizadas por Serviço</h2>
+                <p>Modifique parâmetros específicos e aplique diretamente no serviço desejado ou em todos simultaneamente.</p>
+            </div>
+
+            <form id="customConfigForm" class="custom-form-grid">
+                <!-- 1. Download Client (qBittorrent) -->
+                <div class="form-card">
+                    <div class="card-icon-header">
+                        <div class="card-badge-icon">📥</div>
+                        <div>
+                            <h3>Cliente de Download (qBittorrent)</h3>
+                            <p>Parâmetros do qBittorrent injetados no Radarr & Sonarr</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="qbit_host">Host Interno</label>
+                            <input type="text" id="qbit_host" name="qbit_host" value="qbittorrent" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qbit_port">Porta WebUI</label>
+                            <input type="number" id="qbit_port" name="qbit_port" value="8081" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="qbit_user">Usuário</label>
+                            <input type="text" id="qbit_user" name="qbit_user" value="admin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qbit_password">Senha</label>
+                            <input type="password" id="qbit_password" name="qbit_password" value="adminadmin" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="qbit_movie_category">Categoria Radarr (Filmes)</label>
+                            <input type="text" id="qbit_movie_category" name="qbit_movie_category" value="movies" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qbit_tv_category">Categoria Sonarr (Séries)</label>
+                            <input type="text" id="qbit_tv_category" name="qbit_tv_category" value="tv" required>
+                        </div>
+                    </div>
+
+                    <div class="form-checkbox-row">
+                        <input type="checkbox" id="qbit_remove_completed" name="qbit_remove_completed" checked>
+                        <label for="qbit_remove_completed">Remover torrent concluído do qBittorrent após importação com Hardlink</label>
+                    </div>
+
+                    <div class="card-actions-row">
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="radarr">
+                            Aplicar no Radarr
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="sonarr">
+                            Aplicar no Sonarr
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Root Folders & Hardlinks -->
+                <div class="form-card">
+                    <div class="card-icon-header">
+                        <div class="card-badge-icon">📁</div>
+                        <div>
+                            <h3>Pastas Raiz de Mídia (Root Folders)</h3>
+                            <p>Diretórios de destino no volume /data (TRaSH Guides)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="radarr_root_folder">Pasta de Filmes (Radarr)</label>
+                        <input type="text" id="radarr_root_folder" name="radarr_root_folder" value="/data/media/movies" required>
+                        <span class="field-hint">Mapeado no host em /mnt/space/data/media/movies</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sonarr_root_folder">Pasta de Séries (Sonarr)</label>
+                        <input type="text" id="sonarr_root_folder" name="sonarr_root_folder" value="/data/media/tv" required>
+                        <span class="field-hint">Mapeado no host em /mnt/space/data/media/tv</span>
+                    </div>
+
+                    <div class="card-actions-row">
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="radarr">
+                            Atualizar Pastas Radarr
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="sonarr">
+                            Atualizar Pastas Sonarr
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Prowlarr & Indexadores -->
+                <div class="form-card">
+                    <div class="card-icon-header">
+                        <div class="card-badge-icon">🔍</div>
+                        <div>
+                            <h3>Trackers & Indexadores (Prowlarr)</h3>
+                            <p>Escolha quais indexadores públicos deseja ativar</p>
+                        </div>
+                    </div>
+
+                    <div class="form-checkbox-row">
+                        <input type="checkbox" id="flaresolverr_enabled" name="flaresolverr_enabled" checked>
+                        <label for="flaresolverr_enabled">Ativar Proxy FlareSolverr (Bypass Cloudflare)</label>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 0.75rem;">
+                        <label>Indexadores Públicos:</label>
+                        <div class="indexers-checkbox-grid">
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="1337x" checked>
+                                <span>1337x (Filmes & Séries)</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="YTS" checked>
+                                <span>YTS (Filmes 1080p/4K)</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="The Pirate Bay" checked>
+                                <span>The Pirate Bay</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="TorrentGalaxy" checked>
+                                <span>TorrentGalaxy</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="EZTV" checked>
+                                <span>EZTV (Séries de TV)</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="AnimeTosho">
+                                <span>AnimeTosho (Animes)</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="Nyaa">
+                                <span>Nyaa (Animes)</span>
+                            </label>
+                            <label class="indexer-chip">
+                                <input type="checkbox" name="prowlarr_indexers" value="LimeTorrents">
+                                <span>LimeTorrents</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card-actions-row">
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="prowlarr">
+                            Aplicar Somente no Prowlarr
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Legendas (Bazarr) -->
+                <div class="form-card">
+                    <div class="card-icon-header">
+                        <div class="card-badge-icon">📝</div>
+                        <div>
+                            <h3>Legendas & Áudio (Bazarr)</h3>
+                            <p>Preferências de download e sincronização automática</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bazarr_language">Idioma Principal de Legendas</label>
+                        <select id="bazarr_language" name="bazarr_language" class="form-select">
+                            <option value="pt-BR" selected>Português do Brasil (pt-BR)</option>
+                            <option value="en">Inglês (en)</option>
+                            <option value="es">Espanhol (es)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-checkbox-row">
+                        <input type="checkbox" id="bazarr_ffsubsync" name="bazarr_ffsubsync" checked>
+                        <label for="bazarr_ffsubsync">Ativar ffsubsync (Sincronização precisa por análise de áudio)</label>
+                    </div>
+
+                    <div class="card-actions-row">
+                        <button type="button" class="btn btn-secondary btn-card-action" data-service="bazarr">
+                            Aplicar Somente no Bazarr
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Footer -->
+                <div class="form-actions-footer">
+                    <button type="button" class="btn btn-secondary" id="btnResetDefaults">
+                        Restaurar Padrões
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-large" id="btnApplyCustom">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Aplicar em Todos os Serviços
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- TAB: SERVICES HEALTH -->
+        <section id="tab-services" class="tab-content">
+            <div class="section-header">
+                <h2>Serviços e Containers Ativos</h2>
+                <p>Monitoramento de latência e comunicação da rede Docker interna.</p>
+            </div>
+            
+            <div class="services-grid" id="servicesGrid">
+                <div class="loading-spinner">Verificando serviços...</div>
+            </div>
+        </section>
+
+        <!-- TAB: API KEYS -->
+        <section id="tab-keys" class="tab-content">
+            <div class="section-header">
+                <h2>Gerenciamento de API Keys</h2>
+                <p>As chaves abaixo foram lidas automaticamente dos arquivos <code>config.xml</code> e <code>config.yaml</code> do host.</p>
+            </div>
+
+            <div class="keys-grid" id="keysGrid">
+                <!-- Renderizado via JS -->
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

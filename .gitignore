@@ -1,0 +1,32 @@
+# ==========================================
+# SimpleArrMedia - Git Ignore
+# ==========================================
+
+# Arquivos de ambiente locais (contém caminhos de disco pessoais)
+.env
+
+# Diretório de dados e bancos dos serviços (contém SQLite DBs, chaves de API, logs e credenciais)
+config/
+
+# Diretório de mídia/torrents (caso criado no diretório raiz)
+data/
+
+# Caches e arquivos compilados Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Logs e arquivos de sistema
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*~
