@@ -75,7 +75,7 @@ Para quem está começando no ecossistema *arr, a divisão modular de responsabi
 | Serviço | Porta | Papel Principal | O que ele faz & Por que existe |
 | :--- | :--- | :--- | :--- |
 | **SimpleArr Hub** | 🚀 `:5000` | **Orquestrador Central** | Automação e setup em 1 clique. Descobre API keys, testa a rede e aplica as regras do TRaSH Guides automaticamente. |
-| **[Jellyseerr](https://github.com/Fallenbagel/jellyseerr)** | ✨ `:5055` | **Vitrine de Descobertas** | Portal visual moderno estilo Netflix para a família buscar lançamentos e solicitar filmes/séries em 1 clique. |
+| **[Jellyseerr / Seerr](https://github.com/seerr-team/seerr)** | ✨ `:5055` | **Vitrine de Descobertas** | Portal visual moderno estilo Netflix para a família buscar lançamentos e solicitar filmes/séries em 1 clique. |
 | **[Radarr](https://radarr.video/)** | 🎬 `:7878` | **Gerenciador de Filmes** | Monitora lançamentos de filmes, escolhe qualidades (1080p/4K), envia para download e organiza `/data/media/movies`. |
 | **[Sonarr](https://sonarr.tv/)** | 📺 `:8989` | **Gerenciador de Séries** | Monitora temporadas e episódios semanais, renomeia arquivos e organiza pastas por temporada em `/data/media/tv`. |
 | **[Prowlarr](https://prowlarr.com/)** | 🔍 `:9696` | **Hub de Indexadores & Trackers** | Cadastro central de sites de torrent (1337x, YTS, TPB, etc.). Sincroniza automaticamente com Radarr e Sonarr em 1 só lugar. |
@@ -222,7 +222,7 @@ O SimpleArrMedia combina ferramentas consagradas de infraestrutura Linux, contai
 
 ### 📦 Ecossistema de Mídia Integrado
 * **[Jellyfin](https://jellyfin.org/)**: Servidor de mídia open source e cliente de streaming (.NET Core).
-* **[Jellyseerr](https://github.com/Fallenbagel/jellyseerr)**: Portal moderno de descoberta e solicitações de conteúdo (TypeScript / Next.js).
+* **[Jellyseerr / Seerr](https://github.com/seerr-team/seerr)**: Portal moderno de descoberta e solicitações de conteúdo (TypeScript / Next.js).
 * **[Radarr](https://radarr.video/)**: Gerenciador e catalogador autônomo de filmes (.NET Core / SQLite).
 * **[Sonarr](https://sonarr.tv/)**: Gerenciador e catalogador de séries e animes (.NET Core / SQLite).
 * **[Prowlarr](https://prowlarr.com/)**: Gerenciador centralizado de indexadores e proxies Torznab (.NET Core).
