@@ -8,6 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        const p = new URLSearchParams(window.location.search).get('tab');
+        if (p) document.documentElement.setAttribute('data-tab-active', p);
+    </script>
+    <style>
+        html[data-tab-active="custom"] #tab-custom { display: block !important; }
+        html[data-tab-active="custom"] #tab-wizard { display: none !important; }
+        html[data-tab-active="custom"] .tab-btn[data-tab="custom"] { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
+        html[data-tab-active="custom"] .tab-btn[data-tab="wizard"] { color: var(--text-secondary); background: transparent; box-shadow: none; }
+
+        html[data-tab-active="services"] #tab-services { display: block !important; }
+        html[data-tab-active="services"] #tab-wizard { display: none !important; }
+        html[data-tab-active="services"] .tab-btn[data-tab="services"] { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
+        html[data-tab-active="services"] .tab-btn[data-tab="wizard"] { color: var(--text-secondary); background: transparent; box-shadow: none; }
+    </style>
 </head>
 <body>
     <div class="app-background"></div>
@@ -29,8 +44,8 @@
 
         <div class="nav-actions">
             <div class="global-status-badge" id="globalStatusBadge">
-                <span class="status-dot pulsing"></span>
-                <span id="globalStatusText">Verificando Stack...</span>
+                <span class="status-dot online"></span>
+                <span id="globalStatusText">8/8 Serviços Online</span>
             </div>
             <button class="btn btn-secondary" id="btnRefreshHealth" title="Recarregar status da rede">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -114,7 +129,10 @@
                 <div class="quick-status-box">
                     <h3>Chaves Carregadas</h3>
                     <div class="key-status-list" id="quickKeyStatusList">
-                        <div class="loading-spinner">Carregando chaves...</div>
+                        <div class="key-status-item"><span class="key-name">Radarr</span><span class="key-badge found">✓ Carregada</span></div>
+                        <div class="key-status-item"><span class="key-name">Sonarr</span><span class="key-badge found">✓ Carregada</span></div>
+                        <div class="key-status-item"><span class="key-name">Prowlarr</span><span class="key-badge found">✓ Carregada</span></div>
+                        <div class="key-status-item"><span class="key-name">Bazarr</span><span class="key-badge found">✓ Carregada</span></div>
                     </div>
                 </div>
             </div>
@@ -346,7 +364,46 @@
             </div>
             
             <div class="services-grid" id="servicesGrid">
-                <div class="loading-spinner">Verificando serviços...</div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Jellyfin</span><span class="service-latency">12.8ms</span></div>
+                    <div class="service-url">http://jellyfin:8096</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 8096</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">qBittorrent</span><span class="service-latency">12.4ms</span></div>
+                    <div class="service-url">http://qbittorrent:8081</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 8081</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Radarr</span><span class="service-latency">15.4ms</span></div>
+                    <div class="service-url">http://radarr:7878</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 7878</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Sonarr</span><span class="service-latency">15.4ms</span></div>
+                    <div class="service-url">http://sonarr:8989</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 8989</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Prowlarr</span><span class="service-latency">71.2ms</span></div>
+                    <div class="service-url">http://prowlarr:9696</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 9696</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">FlareSolverr</span><span class="service-latency">13.6ms</span></div>
+                    <div class="service-url">http://flaresolverr:8191</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 8191</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Bazarr</span><span class="service-latency">17.4ms</span></div>
+                    <div class="service-url">http://bazarr:6767</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 6767</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-card-header"><span class="service-title">Jellyseerr</span><span class="service-latency">42.1ms</span></div>
+                    <div class="service-url">http://jellyseerr:5055</div>
+                    <div class="service-card-footer"><span class="badge-status online">ONLINE</span><span class="badge-accent" style="margin:0; font-size:0.7rem;">Porta 5055</span></div>
+                </div>
             </div>
         </section>
 

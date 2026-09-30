@@ -35,6 +35,27 @@ graph TD
 
 ---
 
+## 📸 Demonstração da Interface (SimpleArr Hub)
+
+O projeto inclui uma interface de controle própria rodando na porta `5000` para orquestrar e validar toda a stack:
+
+### 1. Setup Automático em 1 Clique (Zero-Touch)
+> *Lê automaticamente as chaves do host, conecta os serviços e provisiona caminhos, qBittorrent e indexadores:*
+
+![SimpleArr Hub 1-Click Wizard](docs/screenshots/01_wizard.png)
+
+### 2. Configurações Personalizadas por Serviço
+> *Permite editar clientes de download, pastas de filmes/séries, idioma de legendas e selecionar trackers públicos individualmente:*
+
+![SimpleArr Hub Custom Options](docs/screenshots/02_custom_options.png)
+
+### 3. Diagnóstico e Status em Tempo Real
+> *Monitoramento contínuo de latência, saúde dos containers e conectividade da rede interna Docker:*
+
+![SimpleArr Hub Services Health](docs/screenshots/03_services_health.png)
+
+---
+
 ## 🌐 Portas e URLs de Acesso
 
 Substitua `<IP_DO_SERVIDOR>` pelo IP local da sua máquina (ex: `192.168.1.100`) ou utilize `localhost`:
