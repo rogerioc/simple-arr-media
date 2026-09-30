@@ -1,0 +1,148 @@
+services:
+  jellyfin:
+    image: linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+    volumes:
+      - ${CONFIG_DIR}/jellyfin:/config
+      # Raiz unificada /data para suporte completo a hardlinks e TRaSH Guides
+      - ${DATA_DIR}:/data
+    ports:
+      - 8096:8096/tcp
+      - 8920:8920/tcp       # Opcional (HTTPS)
+      - 7359:7359/udp       # Descoberta de clientes (Roku, TVs, Apps locais)
+      # - 1900:1900/udp     # DLNA e auto-descoberta na rede local (opcional/conflito com SSDP local)
+    devices:
+      - /dev/dri:/dev/dri   # Aceleração de hardware Intel (VAAPI / QuickSync)
+    group_add:
+      - "44"                # GID do grupo video
+      - "992"               # GID do grupo render
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+      - WEBUI_PORT=8081
+      - TORRENTING_PORT=6881
+    volumes:
+      - ${CONFIG_DIR}/qbittorrent:/config
+      # Raiz unificada /data para que os downloads em /data/torrents
+      # possam sofrer hardlinks atômicos pelo Radarr/Sonarr para /data/media
+      - ${DATA_DIR}:/data
+    ports:
+      - 8081:8081           # Web UI
+      - 6881:6881           # Porta TCP para conexões de torrent
+      - 6881:6881/udp       # Porta UDP para conexões de torrent
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+    volumes:
+      - ${CONFIG_DIR}/bazarr:/config
+      # Raiz unificada para leitura e escrita de legendas nos diretórios de mídia
+      - ${DATA_DIR}:/data
+    ports:
+      - 6767:6767           # Web UI do Bazarr
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+    volumes:
+      - ${CONFIG_DIR}/radarr:/config
+      # Raiz unificada para mover torrents com hardlink para /data/media/movies
+      - ${DATA_DIR}:/data
+    ports:
+      - 7878:7878           # Web UI do Radarr
+    restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+    volumes:
+      - ${CONFIG_DIR}/prowlarr:/config
+    ports:
+      - 9696:9696           # Web UI do Prowlarr
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=${TZ}
+    ports:
+      - 8191:8191           # Proxy do FlareSolverr
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=${UMASK}
+    volumes:
+      - ${CONFIG_DIR}/sonarr:/config
+      # Raiz unificada para mover episódios com hardlink para /data/media/tv
+      - ${DATA_DIR}:/data
+    ports:
+      - 8989:8989           # Web UI do Sonarr
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/jellyseerr:/app/config
+    ports:
+      - 5055:5055           # Web UI do Jellyseerr
+    restart: unless-stopped
+
+  hub:
+    build:
+      context: ./hub
+      dockerfile: Dockerfile
+    container_name: autoarr-hub
+    environment:
+      - CONFIG_BASE_DIR=/config
+      - DATA_BASE_DIR=/data
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}:/config:ro
+      - ${DATA_DIR}:/data:ro
+    ports:
+      - 5000:5000           # Web UI do AutoArr Hub & Wizard
+    restart: unless-stopped
+
