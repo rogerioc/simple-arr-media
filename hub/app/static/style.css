@@ -1408,6 +1408,14 @@ input:checked + .slider:before {
     color: #fb7185;
 }
 
+.service-desc-box {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    min-height: 2.5rem;
+}
+
 .service-url-box {
     background: rgba(7, 10, 18, 0.6);
     border: 1px solid var(--border-subtle);

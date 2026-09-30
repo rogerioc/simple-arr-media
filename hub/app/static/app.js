@@ -254,16 +254,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Health Status & Live Latency Indicator
     const serviceMeta = {
-        jellyfin: { icon: '🍿', port: 8096, label: 'Media Server' },
-        qbittorrent: { icon: '📥', port: 8081, label: 'Download Client' },
-        radarr: { icon: '🎬', port: 7878, label: 'Gerenciador Filmes' },
-        sonarr: { icon: '📺', port: 8989, label: 'Gerenciador Séries' },
-        prowlarr: { icon: '🔍', port: 9696, label: 'Indexadores & Trackers' },
-        flaresolverr: { icon: '🛡️', port: 8191, label: 'Anti-Bot Proxy' },
-        bazarr: { icon: '📝', port: 6767, label: 'Legendas Automáticas' },
-        jellyseerr: { icon: '✨', port: 5055, label: 'Descoberta & Pedidos' }
+        jellyfin: { icon: '🍿', port: 8096, label: 'Media Server', desc: 'Transmite filmes e séries para Smart TVs e celulares com transcodificação por hardware.' },
+        qbittorrent: { icon: '📥', port: 8081, label: 'Download Client', desc: 'Executa os downloads de mídia via torrent e mantém seeding com Hardlinks atômicos.' },
+        radarr: { icon: '🎬', port: 7878, label: 'Gerenciador Filmes', desc: 'Monitora lançamentos de filmes, seleciona qualidades desejadas e importa na biblioteca.' },
+        sonarr: { icon: '📺', port: 8989, label: 'Gerenciador Séries', desc: 'Acompanha novas temporadas e episódios, organizando e renomeando por temporada.' },
+        prowlarr: { icon: '🔍', port: 9696, label: 'Indexadores & Trackers', desc: 'Hub central que distribui seus indexadores e trackers para o Radarr e Sonarr em 1 só lugar.' },
+        flaresolverr: { icon: '🛡️', port: 8191, label: 'Anti-Bot Proxy', desc: 'Proxy que resolve proteções Cloudflare para indexadores públicos funcionarem no Prowlarr.' },
+        bazarr: { icon: '📝', port: 6767, label: 'Legendas Automáticas', desc: 'Busca legendas em pt-BR e sincroniza perfeitamente com o áudio original via ffsubsync.' },
+        jellyseerr: { icon: '✨', port: 5055, label: 'Descoberta & Pedidos', desc: 'Portal visual moderno onde os usuários da casa buscam lançamentos e solicitam títulos.' }
     };
 
     async function loadHealthStatus(isManual = false) {
@@ -300,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'service-card';
             
-            const meta = serviceMeta[name] || { icon: '📦', port: '', label: 'Container' };
+            const meta = serviceMeta[name] || { icon: '📦', port: '', label: 'Container', desc: 'Serviço da stack de mídia.' };
             const webLink = meta.port ? `http://${window.location.hostname}:${meta.port}` : s.url;
             
             let latencyClass = 'fast';
@@ -319,6 +318,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="service-latency-pill ${latencyClass}">
                         ${s.latency_ms ? s.latency_ms + 'ms' : '--'}
                     </span>
+                </div>
+
+                <div class="service-desc-box">
+                    ${meta.desc}
                 </div>
 
                 <div class="service-url-box">
