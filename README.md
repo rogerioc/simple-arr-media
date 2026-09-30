@@ -9,28 +9,32 @@ O jeito simples, limpo e descomplicado de subir um servidor de mídia doméstico
 O ambiente roda inteiramente via **Docker Compose** utilizando a Docker Engine nativa do Linux, garantindo acesso direto aos discos e aceleração por hardware da GPU Intel (`/dev/dri`).
 
 ```mermaid
-graph TD
-    User["👤 Usuário"] -->|Pede Filme/Série| Jellyseerr["🍿 Jellyseerr (:5055)"]
+flowchart TD
+    User["👤 Usuário"] -->|Pede Filme ou Série| Jellyseerr["🍿 Jellyseerr (:5055)"]
     Admin["🛡️ Admin"] -->|Aprova Pedido| Jellyseerr
-    Jellyseerr -->|Envia Requisição| Radarr["🎬 Radarr (:7878)"]
-    Jellyseerr -->|Envia Requisição| Sonarr["📺 Sonarr (:8989)"]
+    
+    Jellyseerr -->|Requisição de Filme| Radarr["🎬 Radarr (:7878)"]
+    Jellyseerr -->|Requisição de Série| Sonarr["📺 Sonarr (:8989)"]
     
     Radarr -->|Consulta Releases| Prowlarr["🔍 Prowlarr (:9696)"]
     Sonarr -->|Consulta Releases| Prowlarr
-    Prowlarr <-->|Bypass Cloudflare| FlareSolverr["🛡️ FlareSolverr (:8191)"]
-    Prowlarr -->|Trackers Públicos| Trackers["🌐 YTS / 1337x / TPB / TGx"]
     
-    Radarr -->|Envia Torrent| qBittorrent["📥 qBittorrent (:8081)"]
-    Sonarr -->|Envia Torrent| qBittorrent
+    Prowlarr -->|Bypass Cloudflare| FlareSolverr["🛡️ FlareSolverr (:8191)"]
+    FlareSolverr -->|Proxy Resolvido| Prowlarr
+    Prowlarr -->|Busca Trackers Públicos| Trackers["🌐 YTS / 1337x / TPB / TGx"]
     
-    qBittorrent -->|Download em /data/torrents| Storage[("💾 Armazenamento (/data)")]
+    Radarr -->|Envia Download| qBittorrent["📥 qBittorrent (:8081)"]
+    Sonarr -->|Envia Download| qBittorrent
+    
+    qBittorrent -->|Download em /data/torrents| Storage[("💾 Armazenamento /data")]
     Storage -->|Hardlink Atômico para /data/media| Storage
     
-    Radarr & Sonarr -->|Notifica Mídia Pronta| Bazarr["📝 Bazarr (:6767)"]
-    Bazarr -->|Busca & Sincroniza Áudio .srt| Storage
+    Radarr -->|Notifica Mídia Pronta| Bazarr["📝 Bazarr (:6767)"]
+    Sonarr -->|Notifica Mídia Pronta| Bazarr
+    Bazarr -->|Busca Legendas pt-BR| Storage
     
-    Storage -->|Biblioteca /data/media| Jellyfin["📺 Jellyfin (:8096)"]
-    Jellyfin -->|Streaming DLNA / App Nativo| Clients["📺 Roku / LG webOS / Samsung TV"]
+    Storage -->|Lê Biblioteca /data/media| Jellyfin["📺 Jellyfin (:8096)"]
+    Jellyfin -->|Streaming DLNA e App Nativo| Clients["📺 Roku / LG webOS / Samsung TV"]
 ```
 
 ---
