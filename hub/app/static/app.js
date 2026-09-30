@@ -316,6 +316,15 @@ document.addEventListener('DOMContentLoaded', () => {
         loadDiscoveredKeys();
     });
 
+    // 7. Toggle do Balão de Detalhes
+    const btnToggleDetails = document.getElementById('btnToggleDetails');
+    const setupDetailsBox = document.getElementById('setupDetailsBox');
+    if (btnToggleDetails && setupDetailsBox) {
+        btnToggleDetails.addEventListener('click', () => {
+            setupDetailsBox.classList.toggle('closed');
+        });
+    }
+
     // Inicialização
     loadDiscoveredKeys();
     loadDefaultSettings();
