@@ -58,6 +58,11 @@ O projeto inclui uma interface de controle própria rodando na porta `5000` para
 
 ![SimpleArr Hub Services Health](docs/screenshots/03_services_health.png)
 
+### 4. Descoberta Automática de API Keys
+> *Detecta, mascara e permite copiar com segurança as chaves de API geradas pelos containers:*
+
+![SimpleArr Hub API Keys](docs/screenshots/04_api_keys.png)
+
 ---
 
 ## 🌐 Portas e URLs de Acesso
