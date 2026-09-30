@@ -59,3 +59,34 @@ O Jellyfin expõe as portas de rede necessárias para descoberta automática sem
 * **`8096/tcp`**: Interface Web e streaming HTTP.
 * **`7359/udp`**: Protocolo de descoberta automática de clientes Jellyfin (Roku, Android TV, webOS, Tizen).
 * **`1900/udp`**: Protocolo SSDP / DLNA (para aparelhos e TVs antigas que não possuem o app na loja e transmitem via "Fontes de Mídia").
+
+---
+
+## 4. Matriz de Responsabilidades da Stack
+
+Cada container possui uma responsabilidade única e bem delimitada para garantir que falhas isoladas não paralisem toda a mídia:
+
+1. **Jellyseerr (`:5055`)**:
+   - **Papel**: Interface de descoberta para os usuários finais da casa.
+   - **Isolação**: Não faz downloads nem manipula arquivos de disco. Apenas se comunica via REST API com Radarr e Sonarr.
+
+2. **Radarr (`:7878`) & Sonarr (`:8989`)**:
+   - **Papel**: Inteligência de catalogação, verificação de qualidade (perfis 1080p/4K) e ordenação de arquivos.
+   - **Isolação**: Não baixam torrents diretamente; delegam o tráfego de rede P2P para o qBittorrent.
+
+3. **Prowlarr (`:9696`) & FlareSolverr (`:8191`)**:
+   - **Papel**: Abstração de indexadores e proxy anti-bot.
+   - **Isolação**: Radarr e Sonarr não precisam saber como resolver Cloudflare ou se comunicar com 10 sites diferentes; consultam apenas o Prowlarr.
+
+4. **qBittorrent (`:8081`)**:
+   - **Papel**: Motor exclusivo de download e upload (seeding).
+   - **Isolação**: Não renomeia nem decide onde os filmes finais devem ficar; salva em `/data/torrents` e deixa o Radarr/Sonarr criar os hardlinks em `/data/media`.
+
+5. **Bazarr (`:6767`)**:
+   - **Papel**: Busca e sincronização cirúrgica de legendas.
+   - **Isolação**: Executa em segundo plano sem travar o download do vídeo principal, corrigindo discrepâncias de tempo via `ffsubsync`.
+
+6. **Jellyfin (`:8096`)**:
+   - **Papel**: Entrega de streaming de alta fidelidade e transcodificação.
+   - **Isolação**: Apenas leitura em `/data/media`.
+

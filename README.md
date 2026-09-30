@@ -68,6 +68,22 @@ O projeto inclui uma interface de controle própria rodando na porta `5000` para
 
 ![SimpleArr Hub API Keys](docs/screenshots/04_api_keys.png)
 
+## 🧭 Papel e Responsabilidade de Cada Serviço
+
+Para quem está começando no ecossistema *arr, a divisão modular de responsabilidades é o segredo para uma stack estável e autônoma:
+
+| Serviço | Porta | Papel Principal | O que ele faz & Por que existe |
+| :--- | :--- | :--- | :--- |
+| **SimpleArr Hub** | 🚀 `:5000` | **Orquestrador Central** | Automação e setup em 1 clique. Descobre API keys, testa a rede e aplica as regras do TRaSH Guides automaticamente. |
+| **Jellyseerr** | ✨ `:5055` | **Vitrine de Descobertas** | Portal visual moderno estilo Netflix para a família buscar lançamentos e solicitar filmes/séries em 1 clique. |
+| **Radarr** | 🎬 `:7878` | **Gerenciador de Filmes** | Monitora lançamentos de filmes, escolhe qualidades (1080p/4K), envia para download e organiza `/data/media/movies`. |
+| **Sonarr** | 📺 `:8989` | **Gerenciador de Séries** | Monitora temporadas e episódios semanais, renomeia arquivos e organiza pastas por temporada em `/data/media/tv`. |
+| **Prowlarr** | 🔍 `:9696` | **Hub de Indexadores & Trackers** | Cadastro central de sites de torrent (1337x, YTS, TPB, etc.). Sincroniza automaticamente com Radarr e Sonarr em 1 só lugar. |
+| **FlareSolverr** | 🛡️ `:8191` | **Bypass Anti-Bot / Cloudflare** | Atua como proxy inteligente para responder a desafios Cloudflare de sites públicos sem que os trackers quebrem. |
+| **qBittorrent** | 📥 `:8081` | **Motor de Downloads** | Baixa os arquivos via torrent com alta performance e gerencia categorias (`movies`, `tv`) com seeding contínuo. |
+| **Bazarr** | 📝 `:6767` | **Legendas Automáticas** | Varre a biblioteca buscando legendas em pt-BR e sincroniza perfeitamente pelo áudio original do vídeo (`ffsubsync`). |
+| **Jellyfin** | 🍿 `:8096` | **Servidor de Streaming** | O "Netflix próprio": organiza pôsteres, metadados e faz transcodificação por hardware (Intel QSV) para Smart TVs e celulares. |
+
 ---
 
 ## 🌐 Portas e URLs de Acesso
