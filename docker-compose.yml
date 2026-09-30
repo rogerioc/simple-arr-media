@@ -142,6 +142,7 @@ services:
     volumes:
       - ${CONFIG_DIR}:/config:ro
       - ${DATA_DIR}:/data:ro
+      - ./hub/app/static:/app/app/static:ro
     ports:
       - 5000:5000           # Web UI do AutoArr Hub & Wizard
     restart: unless-stopped
