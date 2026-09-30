@@ -90,3 +90,18 @@ Cada container possui uma responsabilidade única e bem delimitada para garantir
    - **Papel**: Entrega de streaming de alta fidelidade e transcodificação.
    - **Isolação**: Apenas leitura em `/data/media`.
 
+---
+
+## 5. Stack Tecnológica & Decisões de Engenharia
+
+| Camada | Tecnologia | Decisão de Engenharia |
+| :--- | :--- | :--- |
+| **Orquestrador Hub** | Python 3.11 + FastAPI + Uvicorn | Alta velocidade de execução assíncrona para chamadas concorrentes às APIs sem bloquear o servidor. |
+| **Cliente de Rede** | HTTPX (`asyncio`) | Permite disparar requisições simultâneas para Radarr, Sonarr, Prowlarr e Bazarr em milissegundos. |
+| **Validação** | Pydantic v2 | Garantia de tipos e parsing seguro de configurações JSON submetidas pelo usuário. |
+| **Descoberta de Chaves** | XML/YAML Parsers Nativos | Lê diretamente os arquivos de configuração montados do host como `ro` (read-only), sem expor chaves via comandos de shell. |
+| **Frontend Web** | Vanilla HTML5 / CSS3 / ES6+ | Zero frameworks pesados (Node, Webpack, React ou Tailwind). Carregamento instantâneo (<50ms) e estilo Obsidian Dark sob medida. |
+| **Containers** | Docker Engine nativa + Compose v2 | Sem camadas virtuais lentas (Docker Desktop), garantindo I/O nativo nos discos e acesso à GPU Intel (`/dev/dri`). |
+| **Storage** | Linux POSIX Hardlinks | Evita duplicação de dados, preservando espaço em disco e permitindo seeding contínuo. |
+
+

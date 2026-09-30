@@ -196,6 +196,39 @@ docker --context default compose logs -f [nome_do_servico]
 * [Guia de Configuração e Integrações](docs/SETUP_GUIDE.md)
 * [Manutenção, Backups e Troubleshooting](docs/MAINTENANCE.md)
 
+## 💻 Tecnologias Utilizadas
+
+O SimpleArrMedia combina ferramentas consagradas de infraestrutura Linux, containers e um motor de automação moderno em Python:
+
+### ⚙️ Core & Orquestrador (SimpleArr Hub)
+* **[Python 3.11](https://www.python.org/)**: Linguagem base rápida, moderna e fortemente tipada.
+* **[FastAPI](https://fastapi.tiangolo.com/)**: Framework web assíncrono de alta performance para a API REST de controle.
+* **[Uvicorn](https://www.uvicorn.org/)**: Servidor ASGI leve e de baixa latência para produção.
+* **[HTTPX](https://www.python-httpx.org/)**: Cliente HTTP assíncrono (`asyncio`) para chamadas simultâneas não-bloqueantes às APIs REST do Radarr, Sonarr, Prowlarr e Bazarr.
+* **[Pydantic v2](https://docs.pydantic.dev/)**: Validação e tipagem rigorosa de payloads e schemas de configuração.
+* **ElementTree & PyYAML**: Parsers nativos para leitura segura e auto-descoberta de API Keys nos arquivos `config.xml` e `config.yaml` do host.
+
+### 🎨 Frontend & Design System
+* **HTML5 Semântico**: Estrutura limpa, modular e acessível.
+* **Vanilla CSS3 Moderno**: Design System Obsidian Dark proprietário, glassmorphism (`backdrop-filter`), gradientes radiais, micro-grid de 32px e micro-interações sem dependência de frameworks externos pesados.
+* **Vanilla JavaScript (ES6+ Assíncrono)**: Manipulação nativa da DOM, Clipboard API e gerenciamento reativo de eventos.
+* **Google Fonts**: Tipografias modernas `Outfit` (display/títulos), `Inter` (interface e leitura) e `JetBrains Mono` (terminal e portas).
+
+### 🐧 Infraestrutura & Kernel Linux
+* **[Docker](https://www.docker.com/) & [Docker Compose v2](https://docs.docker.com/compose/)**: Orquestração multi-container isolada em rede interna bridge.
+* **Hardlinks POSIX Nativos**: Estrutura de disco atômica (zero duplicação de dados) via ponto único de montagem `/data`.
+* **Intel QuickSync Video (QSV) / VAAPI**: Aceleração gráfica por hardware através do dispositivo `/dev/dri`.
+* **Linux cgroups & Permissions**: Isolamento seguro de processos controlados por `PUID`, `PGID` e `UMASK=002`.
+
+### 📦 Ecossistema de Mídia Integrado
+* **Jellyfin**: Servidor de mídia open source (.NET Core).
+* **Jellyseerr**: Portal de descoberta e solicitações (TypeScript / Node.js).
+* **Radarr & Sonarr**: Gerenciadores de filmes e séries (.NET Core / SQLite).
+* **Prowlarr**: Gerenciador de indexadores e proxies Torznab (.NET Core).
+* **FlareSolverr**: Proxy com Chromium headless (Node.js / Puppeteer) para resolução de proteções Cloudflare.
+* **Bazarr**: Sincronizador de legendas (Python) integrado ao algoritmo de espectrograma de áudio `ffsubsync`.
+* **qBittorrent**: Cliente BitTorrent de alta performance (C++ / libtorrent-rasterbar).
+
 ---
 
 ## 🤖 Desenvolvimento & Pair Programming
